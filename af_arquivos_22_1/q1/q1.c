@@ -15,10 +15,10 @@ typedef struct {
 void *thread1(void *_arg) {
     t_arg *arg = _arg;
 
-    printf("A\n");
-    sem_post(arg->s1); 
+    printf("A\n"); 
     sem_wait(arg->s4);    
     printf("C\n");
+    sem_post(arg->s1);
 
     return NULL;
 }
@@ -26,7 +26,7 @@ void *thread1(void *_arg) {
 void *thread2(void *_arg) {
     t_arg *arg = _arg;
 
-    sem_wait(arg->s4); 
+    sem_wait(arg->s1); 
     printf("D\n");
     sem_post(arg->s2);
 
@@ -36,10 +36,11 @@ void *thread2(void *_arg) {
 void *thread3(void *_arg) {
     t_arg *arg = _arg;
 
+    sem_wait(arg->s2);
     printf("E\n");
-    sem_post(arg->s3);
-    sem_wait(arg->s2); 
+
     printf("F\n");
+    sem_post(arg->s3);
 
     return NULL;
 }
