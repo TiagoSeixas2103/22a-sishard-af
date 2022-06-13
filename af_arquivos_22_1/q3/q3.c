@@ -3,6 +3,9 @@
 #include <unistd.h>
 #include <signal.h>
 #include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 // Crie AQUI os handlers necessários
 int status = 0;
@@ -21,7 +24,7 @@ int main(int argc, char *argv[]) {
     // Exiba o PID deste processo
     printf("PID deste processo: %d\n", getpid());
 
-    FILE arquivo = open(argv[1], "wr");
+    FILE arquivo = open(*argv[1], "WR");
 
     if (arquivo) {
         write(arquivo, "08:15:03 ./q3 finished with signal sigint\n");

@@ -19,6 +19,7 @@ int main(int argc, char *argv[]){
         filho = fork();
 
         if (filho == 0) {
+            printf("%s\n",argv[1]);
             char *args[] = {argv[1], NULL};
             verify = execvp("verify", args);
             printf("Acabei filho\n");
